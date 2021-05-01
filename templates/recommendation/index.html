@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Movie Recommendation System</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+  </head>
+  <body>
+    <div class="nav">
+      <h1>Movie Recommendation System</h1>
+    </div>
+    <form autocomplete="off" class="container" action="/" method="post">
+      {% csrf_token %}
+      <div class="autocomplete" style="width:300px;display:flex;">
+      <input id="myInput" type="search" name="search" placeholder='Search'>
+
+      <input type="submit" value='Search'>
+    </div>
+
+    </form>
+    <div class="recommendation container">
+      {% if mylist %}
+      {% for list in mylist %}
+        <div class='listitem'>
+          <div class="img">
+            <img src="{% static "img/backpic.PNG" %}" alt="poster-pic">
+          </div>
+          <div class="content span">
+            <span>{{list}}<i class="fas fa-play-circle"></i></span>
+          </div>
+        </div>
+
+      {%endfor%}
+      {% else %}
+        <div class="alternate">
+          <h2>Getting bored ? &#128533;<br>
+            Need Recommendations For Movies ?<br>
+            Search Above!
+          </h2>
+        </div>
+      {%endif%}
+    </div>
+    <script src="{% static "js/myapp.js" %}">
+
+    </script>
+  </body>
+</html>
